@@ -20,7 +20,7 @@ const Search = () => {
               setWinery(e.target.value);
             }}
           >
-            <option />
+            <option>Select</option>
             {wineries.map(optionCreator)}
           </select>
         </label>
