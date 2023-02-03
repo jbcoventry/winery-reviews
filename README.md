@@ -5,3 +5,7 @@ A site that is going to present reviews for wineries in the Hunter Valley region
 ## Current State
 
 Renders.
+
+## Current Goal
+
+Drop down on left of winery names. List on right of reviews for selected winery
