@@ -16,7 +16,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <header className="text-center text-2xl">Winery Reviews</header>
-      <main className="grid grid-cols-2">
+      <main>
         <Search />
         <List />
       </main>

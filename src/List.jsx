@@ -8,7 +8,22 @@ const List = () => {
   if (results.isLoading) {
     return <div>Loading</div>;
   }
-  return <div>{JSON.stringify(reviews)}</div>;
+  return (
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Rating</th>
+        <th>Comment</th>
+      </tr>
+      {reviews.map((review) => (
+        <tr key={review.publishedAtDate}>
+          <td>{review.publishedAtDate}</td>
+          <td>{review.stars}</td>
+          <td>{review.text}</td>
+        </tr>
+      ))}
+    </table>
+  );
 };
 
 export default List;

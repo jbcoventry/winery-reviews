@@ -1,12 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import fetchReviews from "./fetchReviews";
 import wineries from "./wineries";
 
 const Search = () => {
   const optionCreator = (object) => {
-    return <option key={object.placeId}>{object.title}</option>;
+    return <option key={object.title}>{object.title}</option>;
   };
 
   const [winery, setWinery] = useState("");
+  const results = useQuery(["search", winery], fetchReviews);
 
   return (
     <div>
