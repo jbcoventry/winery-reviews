@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <header className="text-center text-2xl">Winery Reviews</header>
+      <header className="m-0 p-0 text-center text-2xl ">Winery Reviews</header>
       <main>
         <Search />
         <List />
