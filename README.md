@@ -4,8 +4,8 @@ A site that is going to present reviews for wineries in the Hunter Valley region
 
 ## Current State
 
-Review list populates from api. Drop down selects wineries.
+Review table populates based on selected winery in dropdown
 
 ## Current Goal
 
-Modify requested api depending on selected winery.
+Charts!
