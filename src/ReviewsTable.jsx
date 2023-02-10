@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import fetchReviews from "./fetchReviews";
+import fetchWineryReviews from "./fetchWineryReviews";
 
-const List = () => {
-  const results = useQuery(["reviews"], fetchReviews);
-  const wineryData = results.data;
+const ReviewsTable = ({ selectedWineries }) => {
+  const wineryIndex = `?offset=${selectedWineries}&limit=1`;
+  const results = useQuery(["reviews", wineryIndex], fetchWineryReviews);
 
-  if (results.isLoading) {
-    return <div>Loading</div>;
+  if (results.isLoading || results == null) {
+    return <div>Loading reviews</div>;
   }
+
+  const wineryData = results.data[0];
   return (
     // <div>
     //   <h1>{wineryData[0].title}</h1>
@@ -21,7 +23,7 @@ const List = () => {
         </tr>
       </thead>
       <tbody>
-        {wineryData[0].reviews.map((review) => (
+        {wineryData.reviews.map((review) => (
           <tr key={review.publishedAtDate}>
             <td>{review.publishedAtDate}</td>
             <td>{review.stars}</td>
@@ -33,4 +35,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default ReviewsTable;
