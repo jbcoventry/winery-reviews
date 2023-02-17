@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import fetchWineryReviews from "./fetchWineryReviews";
 
-const ReviewsTable = ({ selectedWineries }) => {
+const ReviewsTable = ({ selectedWineries, oldestDate }) => {
   const wineryIndex = `?offset=${selectedWineries}&limit=1`;
   const results = useQuery(["reviews", wineryIndex], fetchWineryReviews);
 
@@ -11,9 +11,6 @@ const ReviewsTable = ({ selectedWineries }) => {
 
   const wineryData = results.data[0];
   return (
-    // <div>
-    //   <h1>{wineryData[0].title}</h1>
-    // </div>
     <table>
       <thead>
         <tr>
@@ -23,16 +20,24 @@ const ReviewsTable = ({ selectedWineries }) => {
         </tr>
       </thead>
       <tbody>
-        {wineryData.reviews.map((review) => (
-          <tr key={review.publishedAtDate}>
-            <td>{review.publishedAtDate}</td>
-            <td>{review.stars}</td>
-            <td>{review.text}</td>
-          </tr>
-        ))}
+        {wineryData.reviews
+          .filter((review) => Date.parse(review.publishedAtDate) < Date.now())
+          .map((review) => (
+            <tr key={review.publishedAtDate}>
+              <td>
+                {new Date(
+                  Date.parse(review.publishedAtDate)
+                ).toLocaleDateString()}
+              </td>
+              <td>{review.stars}</td>
+              <td>{review.text}</td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );
 };
 
 export default ReviewsTable;
+
+// day * 24 * 60 * 60 * 1000

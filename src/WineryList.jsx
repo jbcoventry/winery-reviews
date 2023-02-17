@@ -9,7 +9,7 @@ const WineryList = ({ selectedWineries, setSelectedWineries }) => {
       </option>
     );
   };
-
+ 
   const results = useQuery(["list"], fetchWineryList);
   if (results.isLoading) {
     return (
@@ -38,6 +38,7 @@ const WineryList = ({ selectedWineries, setSelectedWineries }) => {
             {wineries.map(optionCreator)}
           </select>
         </label>
+        
       </form>
     </div>
   );

@@ -2,13 +2,13 @@ const fetchWineryReviews = async ({ queryKey }) => {
   const apiAddress = import.meta.env.VITE_WINERY_REVIEWS;
   const Parameters = queryKey[1];
 
-  const apiRes = await fetch(apiAddress + Parameters);
+  const res = await fetch(apiAddress + Parameters);
 
-  if (!apiRes.ok) {
+  if (!res.ok) {
     throw new Error("fetchWineryReviews fetch not ok");
   }
 
-  return apiRes.json();
+  return res.json();
 };
 
 export default fetchWineryReviews;
