@@ -30,11 +30,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <header className="m-0 p-0 text-center text-2xl ">Winery Reviews</header>
       <main>
-        <OptionPicker
+        {/* <OptionPicker
           selectedWineries={selectedWineries}
           setSelectedWineries={setSelectedWineries}
         />
-        <Chart />
+        <Chart /> */}
       </main>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
