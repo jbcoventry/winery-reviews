@@ -7,7 +7,7 @@ const DateFilter = ({ oldestDate, setOldestDate }) => {
         name="enteredDays"
         onChange={(e) => setOldestDate(e.target.value)}
       >
-        <option value={0}> All </option>
+        <option value={73000 * 24 * 60 * 60 * 1000}> All </option>
         <option value={90 * 24 * 60 * 60 * 1000}> 90 days </option>
         <option value={180 * 24 * 60 * 60 * 1000}> 180 days </option>
         <option value={365 * 24 * 60 * 60 * 1000}> 1 year </option>

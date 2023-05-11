@@ -3,13 +3,13 @@ import fetchWineryReviews from "./fetchWineryReviews";
 
 const ReviewsTable = ({ selectedWineries, oldestDate }) => {
   const wineryIndex = `?offset=${selectedWineries}&limit=1`;
-  const results = useQuery(["reviews", wineryIndex], fetchWineryReviews);
+  const result = useQuery(["reviews", wineryIndex], fetchWineryReviews);
 
-  if (results.isLoading || results == null) {
+  if (result.isLoading || result == null) {
     return <div>Loading reviews</div>;
   }
 
-  const wineryData = results.data[0];
+  const wineryData = result.data[0];
   return (
     <table>
       <thead>
@@ -21,7 +21,10 @@ const ReviewsTable = ({ selectedWineries, oldestDate }) => {
       </thead>
       <tbody>
         {wineryData.reviews
-          .filter((review) => Date.parse(review.publishedAtDate) < Date.now())
+          .filter(
+            (review) =>
+              Date.parse(review.publishedAtDate) > Date.now() - oldestDate
+          )
           .map((review) => (
             <tr key={review.publishedAtDate}>
               <td>
@@ -39,5 +42,3 @@ const ReviewsTable = ({ selectedWineries, oldestDate }) => {
 };
 
 export default ReviewsTable;
-
-// day * 24 * 60 * 60 * 1000

@@ -20,8 +20,7 @@ const WineryList = ({ selectedWineries, setSelectedWineries }) => {
   }
   const wineries = results.data;
   delete wineries[42];
-  // const wineries = results.data.filter((winery, index) => index != 42);
-  // Filter Removes duplicate Elbourne Wines, remove on API update. Updated. Delete should preserve index of subsequent entries so it matches for the Table fetch.
+  // Filter Removes duplicate Elbourne Wines, remove on API update.
   return (
     <div>
       <form>
