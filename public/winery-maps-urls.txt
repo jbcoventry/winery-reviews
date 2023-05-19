@@ -23,7 +23,6 @@ https://www.google.com/maps/place/Degen+Estate/@-32.736371,151.299618,17z/data=!
 https://www.google.com/maps/place/Domaine+de+Binet/@-32.7497901,151.3685302,17z/data=!3m1!4b1!4m5!3m4!1s0x6b734af405f3ce15:0xe0f380a7819d07fe!8m2!3d-32.7497901!4d151.3685302?hl=en
 https://www.google.com/maps/place/Drayton's+Family+Wines/@-32.808758,151.2835551,17z/data=!3m1!4b1!4m5!3m4!1s0x6b0ccb09a70ec3e3:0xbe71c73bb82c28fe!8m2!3d-32.808758!4d151.2835551?hl=en
 https://www.google.com/maps/place/Elbourne+Wines/@-32.8221929,151.2981172,17z/data=!3m1!4b1!4m5!3m4!1s0x6b0ccb132c6782c1:0x93a03760ab647267!8m2!3d-32.8221929!4d151.2981172?hl=en
-https://www.google.com/maps/place/Emma's+Cottage/@-32.7415147,151.3474714,17z/data=!3m1!4b1!4m8!3m7!1s0x6b734adcd5754c19:0xee32ac17842e03aa!5m2!4m1!1i2!8m2!3d-32.7415147!4d151.3474714?hl=en
 https://www.google.com/maps/place/Ernest+Hill+Wines/@-32.7970929,151.3442948,17z/data=!3m1!4b1!4m5!3m4!1s0x6b73353e98b41799:0xae157b266ba77956!8m2!3d-32.7970929!4d151.3442948?hl=en
 https://www.google.com/maps/place/First+Creek+Wines/@-32.7626661,151.3141838,17z/data=!3m1!4b1!4m6!3m5!1s0x6b0cb558f92de739:0xde9cce4284705046!8m2!3d-32.7626661!4d151.3141838!16s%2Fg%2F1v_0jxds?hl=en
 https://www.google.com/maps/place/Gartelmann+Wines+Pty+Ltd./@-32.7452115,151.3873301,17z/data=!3m1!4b1!4m5!3m4!1s0x6b734a4dd674b96b:0xa3596791fa19f176!8m2!3d-32.7452115!4d151.3873301?hl=en

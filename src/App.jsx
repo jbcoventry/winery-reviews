@@ -1,12 +1,10 @@
-import DateFilter from "./DateFilter";
-import { useState } from "react";
+import { StrictMode, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
-import WineryList from "./WineryList";
-import ReviewsTable from "./ReviewsTable";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Chart from "./Chart";
 import OptionPicker from "./OptionPicker";
+import DateFilter from "./DateFilter";
+import ReviewsTable from "./ReviewsTable";
 
 if (import.meta.hot) {
   import.meta.hot.on("vite:beforeUpdate", () => console.clear());
@@ -22,19 +20,23 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [selectedWineries, setSelectedWineries] = useState(null);
+  const [selectedWineries, setSelectedWineries] = useState("");
 
-  // const [oldestDate, setOldestDate] = useState(73000 * 24 * 60 * 60 * 1000);
+  const [oldestDate, setOldestDate] = useState("");
 
   return (
     <QueryClientProvider client={queryClient}>
       <header className="m-0 p-0 text-center text-2xl ">Winery Reviews</header>
       <main>
-        {/* <OptionPicker
+        <OptionPicker
           selectedWineries={selectedWineries}
           setSelectedWineries={setSelectedWineries}
         />
-        <Chart /> */}
+        <DateFilter oldestDate={oldestDate} setOldestDate={setOldestDate} />
+        <ReviewsTable
+          selectedWineries={selectedWineries}
+          oldestDate={oldestDate}
+        />
       </main>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
@@ -43,4 +45,8 @@ const App = () => {
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);

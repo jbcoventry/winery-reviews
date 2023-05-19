@@ -1,43 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
-import fetchWineryReviews from "./fetchWineryReviews";
+import fetchWinery from "./fetchWinery";
+import CalculatedData from "./CalculatedData";
 
 const ReviewsTable = ({ selectedWineries, oldestDate }) => {
-  const wineryIndex = `?offset=${selectedWineries}&limit=1`;
-  const result = useQuery(["reviews", wineryIndex], fetchWineryReviews);
+  const query = useQuery([selectedWineries[0]?.value], fetchWinery);
 
-  if (result.isLoading || result == null) {
+  if (query.isLoading) {
     return <div>Loading reviews</div>;
   }
+  if (!query.data) {
+    return <div>Select a Winery</div>;
+  }
 
-  const wineryData = result.data[0];
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Rating</th>
-          <th>Comment</th>
-        </tr>
-      </thead>
-      <tbody>
-        {wineryData.reviews
-          .filter(
-            (review) =>
-              Date.parse(review.publishedAtDate) > Date.now() - oldestDate
-          )
-          .map((review) => (
-            <tr key={review.publishedAtDate}>
-              <td>
-                {new Date(
-                  Date.parse(review.publishedAtDate)
-                ).toLocaleDateString()}
-              </td>
-              <td>{review.stars}</td>
-              <td>{review.text}</td>
-            </tr>
-          ))}
-      </tbody>
-    </table>
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Rating</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {query?.data?.reviews
+            .filter((review) =>
+              oldestDate
+                ? review.publishedAtDate >
+                  Date.now() - oldestDate * 24 * 60 * 60 * 1000
+                : true
+            )
+            .map((review) => (
+              <tr key={review.publishedAtDate}>
+                <td>{review.publishedAtDate.toLocaleString()}</td>
+                <td>{review.stars}</td>
+                <td>{review.text}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 

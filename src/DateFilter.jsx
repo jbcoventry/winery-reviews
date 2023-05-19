@@ -1,20 +1,20 @@
+import { useState } from "react";
+
 const DateFilter = ({ oldestDate, setOldestDate }) => {
   return (
     <label>
-      Show:
-      <select
+      Days:
+      <input
+        className="w-1/6"
         value={oldestDate}
-        name="enteredDays"
-        onChange={(e) => setOldestDate(e.target.value)}
-      >
-        <option value={73000 * 24 * 60 * 60 * 1000}> All </option>
-        <option value={90 * 24 * 60 * 60 * 1000}> 90 days </option>
-        <option value={180 * 24 * 60 * 60 * 1000}> 180 days </option>
-        <option value={365 * 24 * 60 * 60 * 1000}> 1 year </option>
-        <option value={730 * 24 * 60 * 60 * 1000}> 2 years </option>
-      </select>
+        placeholder="All"
+        onChange={(e) => setOldestDate(e.target.value.replace(/[^0-9]/g, ""))}
+      />
     </label>
   );
 };
 
 export default DateFilter;
+// {new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toLocaleString()}
+// <br />
+// {new Date().toLocaleString()}
