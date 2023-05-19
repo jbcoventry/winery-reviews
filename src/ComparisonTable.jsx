@@ -35,7 +35,7 @@ const ComparisonTable = () => {
               <tr key={winery.title}>
                 <td>{index + 1}</td>
                 <td>{winery.title}</td>
-                <td>{reviewStarsAverage(winery.reviews)}</td>
+                <td>{winery.reviewStarAverage}</td>
                 <td>{winery.reviews.length}</td>
               </tr>
             ))}
