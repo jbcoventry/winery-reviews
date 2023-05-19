@@ -9,9 +9,13 @@ const CalculatedData = ({ selectedWineries }) => {
     <div>
       <p>
         Average Rating=
-        {query?.data?.reviews.reduce((acc, review) => {
-          return acc + review.stars;
-        }, 0) / query?.data?.reviews.length}
+        {Math.round(
+          (query?.data?.reviews.reduce((acc, review) => {
+            return acc + review.stars;
+          }, 0) /
+            query?.data?.reviews.length) *
+            1000
+        ) / 1000}
       </p>
     </div>
   );
