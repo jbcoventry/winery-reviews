@@ -1,47 +1,27 @@
-import { useQuery } from "@tanstack/react-query";
-import fetchComparison from "./fetchComparison";
-import reviewStarsAverage from "./reviewStarsAverage";
-
-const ComparisonTable = () => {
-  const query = useQuery(["comparison"], fetchComparison);
-
-  if (query.isLoading) {
-    return <div>Loading comparison table</div>;
-  }
-  if (!query.data) {
-    return <div>Something went wrong</div>;
-  }
-
+const ComparisonTable = ({ data }) => {
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Title</th>
-            <th>Average Rating</th>
-            <th>Number of Reviews</th>
+    <div>
+      <table className="grid grid-cols-4 items-center">
+        <thead className="contents">
+          <tr className="contents">
+            <th className="text-left">Rank</th>
+            <th className="text-left">Title</th>
+            <th className="text-left">Average Rating</th>
+            <th className="text-left">Number of Reviews</th>
           </tr>
         </thead>
-        <tbody>
-          {query?.data
-            // .filter((review) =>
-            //   oldestDate
-            //     ? review.publishedAtDate >
-            //       Date.now() - oldestDate * 24 * 60 * 60 * 1000
-            //     : true
-            // )
-            .map((winery, index) => (
-              <tr key={winery.title}>
-                <td>{index + 1}</td>
-                <td>{winery.title}</td>
-                <td>{winery.reviewStarAverage}</td>
-                <td>{winery.reviews.length}</td>
-              </tr>
-            ))}
+        <tbody className="contents">
+          {data?.map(({ title, averageRating, NumberOfReviews }, index) => (
+            <tr key={title} className="contents ">
+              <td>{index + 1}</td>
+              <td>{title}</td>
+              <td>{averageRating}</td>
+              <td>{NumberOfReviews}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 
