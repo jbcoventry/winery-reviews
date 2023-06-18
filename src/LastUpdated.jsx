@@ -1,11 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import fetchLastUpdated from "./helpers/fetchLastUpdated";
-
-const LastUpdated = () => {
-  const lastUpdated = useQuery(["LastUpdated"], fetchLastUpdated);
+const LastUpdated = (queryLastUpdated) => {
   return (
     <div className="grid items-center rounded lg:col-start-3  ">
-      Last Updated: {new Date(lastUpdated?.data).toLocaleString()}
+      Reviews Updated:
+      {queryLastUpdated.isSuccess
+        ? new Date(queryLastUpdated?.data).toLocaleString()
+        : ""}
     </div>
   );
 };

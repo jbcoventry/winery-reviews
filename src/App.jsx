@@ -21,9 +21,6 @@ const App = () => {
   return (
     <div className="m-4">
       <QueryClientProvider client={queryClient}>
-        <header className="text-center text-2xl">
-          Winery Reviews
-        </header>
         <main>
           <Comparison />
         </main>

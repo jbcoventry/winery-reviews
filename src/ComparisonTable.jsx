@@ -5,7 +5,7 @@ const ComparisonTable = ({ data }) => {
         <thead className="contents">
           <tr className="contents">
             <th className="text-left">Rank</th>
-            <th className="text-left">Title</th>
+            <th className="text-left">Winery</th>
             <th className="text-left">Average Rating</th>
             <th className="text-left">Number of Reviews</th>
           </tr>
