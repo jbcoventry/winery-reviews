@@ -1,4 +1,16 @@
-const NumberInput = ({ title, number, setNumber, maxLength }) => {
+type NumberInputProps = {
+  title: string;
+  number: 0;
+  setNumber: (value: number | string) => void;
+  maxLength: number;
+};
+
+const NumberInput = ({
+  title,
+  number,
+  setNumber,
+  maxLength,
+}: NumberInputProps) => {
   return (
     <div
       className="

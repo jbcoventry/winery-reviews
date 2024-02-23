@@ -1,4 +1,11 @@
-const sortByReviewAverage = (data, oldestDate, minimumReviews, now) => {
+import { wineriesAPIResponse, Review } from "./types";
+
+const sortByReviewAverage = (
+  data: wineriesAPIResponse,
+  oldestDate: number,
+  minimumReviews: number,
+  now: number
+) => {
   if (data === undefined) {
     return [];
   }
@@ -7,11 +14,12 @@ const sortByReviewAverage = (data, oldestDate, minimumReviews, now) => {
   const wineriesOverMinimumReviews = data.filter(
     (winery) => winery.reviews.length >= minimumReviews
   );
-  const indexOfLastReviewToInclude = (x) =>
+  const indexOfLastReviewToInclude = (x: Review[]) =>
     x.findIndex(
       ({ timestamp }) => timestamp < nowInSeconds - oldestDateSeconds
     );
-  const reviewsSlicedByDate = (x) => x.slice(0, indexOfLastReviewToInclude(x));
+  const reviewsSlicedByDate = (x: Review[]) =>
+    x.slice(0, indexOfLastReviewToInclude(x));
   const wineriesWithAverageRatingAndTotalReviews =
     wineriesOverMinimumReviews.map(({ title, reviews }) => {
       const filteredReviews = oldestDate
@@ -21,7 +29,7 @@ const sortByReviewAverage = (data, oldestDate, minimumReviews, now) => {
         title,
         averageRating:
           filteredReviews.length === 0
-            ? "–"
+            ? 0
             : Math.round(
                 (filteredReviews.reduce((acc, { rating }) => acc + rating, 0) /
                   filteredReviews.length) *

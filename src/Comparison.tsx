@@ -5,13 +5,20 @@ import ComparisonTable from "./ComparisonTable";
 import fetchLastUpdated from "./helpers/fetchLastUpdated";
 import fetchList from "./helpers/fetchList";
 import sortByReviewAverage from "./sortByReviewAverage";
+import { type wineriesAPIResponse } from "./types";
 
 const Comparison = () => {
   const [now] = useState(Date.now());
-  const [oldestDate, setOldestDate] = useState("");
-  const [minimumReviews, setMinimumReviews] = useState("");
-  const queryData = useQuery(["list"], fetchList);
-  const queryLastUpdated = useQuery(["LastUpdated"], fetchLastUpdated);
+  const [oldestDate, setOldestDate] = useState(0);
+  const [minimumReviews, setMinimumReviews] = useState(0);
+  const queryData = useQuery<wineriesAPIResponse>({
+    queryKey: ["list"],
+    queryFn: fetchList,
+  });
+  const queryLastUpdated = useQuery({
+    queryKey: ["LastUpdated"],
+    queryFn: fetchLastUpdated,
+  });
   const sorted = useMemo(
     () => sortByReviewAverage(queryData?.data, oldestDate, minimumReviews, now),
     [queryData?.data, oldestDate, minimumReviews, now]

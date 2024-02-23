@@ -1,4 +1,9 @@
-const LastUpdated = (queryLastUpdated) => {
+type queryLastUpdatedType = {
+  isSuccess: boolean;
+  data: string;
+};
+
+const LastUpdated = (queryLastUpdated: queryLastUpdatedType) => {
   return (
     <div className="grid items-center rounded lg:col-start-3  ">
       Reviews Updated:

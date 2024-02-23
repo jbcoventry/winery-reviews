@@ -4,10 +4,6 @@ import { createRoot } from "react-dom/client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Comparison from "./Comparison";
 
-if (import.meta.hot) {
-  import.meta.hot.on("vite:beforeUpdate", () => console.clear());
-}
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

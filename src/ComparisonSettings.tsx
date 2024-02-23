@@ -1,13 +1,21 @@
 import NumberInput from "./NumberInput";
 import LastUpdated from "./LastUpdated";
 
+type ComparisonSettingsProps = {
+  minimumReviews: number;
+  setMinimumReviews: (arg0: string) => void;
+  oldestDate: number;
+  setOldestDate: (arg0: string) => void;
+  queryLastUpdated: string;
+};
+
 const ComparisonSettings = ({
   minimumReviews,
   setMinimumReviews,
   oldestDate,
   setOldestDate,
   queryLastUpdated,
-}) => {
+}: ComparisonSettingsProps) => {
   return (
     <div className="grid grid-flow-dense grid-cols-1 gap-2 lg:grid-cols-3">
       <LastUpdated {...queryLastUpdated} />
