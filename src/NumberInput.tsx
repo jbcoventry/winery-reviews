@@ -1,7 +1,7 @@
 type NumberInputProps = {
   title: string;
-  number: 0;
-  setNumber: (value: number | string) => void;
+  number: number;
+  setNumber: React.Dispatch<React.SetStateAction<number>>;
   maxLength: number;
 };
 
@@ -25,10 +25,10 @@ const NumberInput = ({
           value={number}
           maxLength={maxLength}
           onChange={(e) => {
-            Number(setNumber(e.target.value.replace(/[^0-9]/g, "")));
+            setNumber(Number(e.target.value.replace(/[^0-9]/g, "")));
           }}
           onFocus={() => {
-            setNumber("");
+            setNumber(0);
           }}
         />
       </label>

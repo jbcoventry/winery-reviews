@@ -3,9 +3,9 @@ import LastUpdated from "./LastUpdated";
 
 type ComparisonSettingsProps = {
   minimumReviews: number;
-  setMinimumReviews: (arg0: string) => void;
+  setMinimumReviews: number;
   oldestDate: number;
-  setOldestDate: (arg0: string) => void;
+  setOldestDate: number;
   queryLastUpdated: string;
 };
 
@@ -28,7 +28,7 @@ const ComparisonSettings = ({
       <NumberInput
         title={"Show for last X days:"}
         number={oldestDate}
-        setNumber={setOldestDate}
+        setNumber({setOldestDate})
         maxLength={4}
       />
     </div>

@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Comparison from "./Comparison";
 
@@ -26,8 +26,9 @@ const App = () => {
   );
 };
 
-const container = document.getElementById("root");
-const root = createRoot(container);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <StrictMode>
     <App />
