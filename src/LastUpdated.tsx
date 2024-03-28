@@ -1,15 +1,8 @@
-type queryLastUpdatedType = {
-  isSuccess: boolean;
-  data: string;
-};
-
-const LastUpdated = (queryLastUpdated: queryLastUpdatedType) => {
+const LastUpdated = ({ timestamp }: { timestamp: string }) => {
   return (
     <div className="grid items-center rounded lg:col-start-3  ">
       Reviews Updated:
-      {queryLastUpdated.isSuccess
-        ? new Date(queryLastUpdated?.data).toLocaleString()
-        : ""}
+      {new Date(timestamp).toLocaleString()}
     </div>
   );
 };

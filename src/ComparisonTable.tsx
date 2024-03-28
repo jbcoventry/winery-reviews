@@ -1,4 +1,10 @@
-const ComparisonTable = ({ data }) => {
+type ComparisonTableProps = {
+  title: string;
+  averageRating: number;
+  NumberOfReviews: number;
+}[];
+
+const ComparisonTable = ({ data }: { data: ComparisonTableProps }) => {
   return (
     <div>
       <table className="grid grid-cols-4 items-center">

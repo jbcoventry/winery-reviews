@@ -3,10 +3,10 @@ import LastUpdated from "./LastUpdated";
 
 type ComparisonSettingsProps = {
   minimumReviews: number;
-  setMinimumReviews: number;
+  setMinimumReviews: React.Dispatch<React.SetStateAction<number>>;
   oldestDate: number;
-  setOldestDate: number;
-  queryLastUpdated: string;
+  setOldestDate: React.Dispatch<React.SetStateAction<number>>;
+  lastUpdatedTimestamp: string;
 };
 
 const ComparisonSettings = ({
@@ -14,11 +14,11 @@ const ComparisonSettings = ({
   setMinimumReviews,
   oldestDate,
   setOldestDate,
-  queryLastUpdated,
+  lastUpdatedTimestamp,
 }: ComparisonSettingsProps) => {
   return (
     <div className="grid grid-flow-dense grid-cols-1 gap-2 lg:grid-cols-3">
-      <LastUpdated {...queryLastUpdated} />
+      <LastUpdated timestamp={lastUpdatedTimestamp} />
       <NumberInput
         title={"Minimum Total Reviews:"}
         number={minimumReviews}
@@ -28,7 +28,7 @@ const ComparisonSettings = ({
       <NumberInput
         title={"Show for last X days:"}
         number={oldestDate}
-        setNumber({setOldestDate})
+        setNumber={setOldestDate}
         maxLength={4}
       />
     </div>

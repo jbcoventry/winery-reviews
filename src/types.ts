@@ -21,3 +21,9 @@ type Winery = {
 };
 
 export type wineriesAPIResponse = Winery[] | undefined;
+
+export type queryLastUpdatedType = {
+  data: string;
+  isLoading: boolean;
+  isSuccess: boolean;
+};
