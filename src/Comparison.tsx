@@ -45,4 +45,5 @@ const Comparison = () => {
     </div>
   );
 };
+
 export default Comparison;
