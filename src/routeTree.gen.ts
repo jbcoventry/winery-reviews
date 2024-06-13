@@ -14,12 +14,12 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as FirstRouteImport } from './routes/firstRoute'
-import { Route as FirstRouteInnerRouteImport } from './routes/_firstRoute/innerRoute'
+import { Route as DetailImport } from './routes/detail'
+import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
 const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
@@ -33,13 +33,13 @@ const FirstRouteRoute = FirstRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexLazyRoute = IndexLazyImport.update({
-  path: '/',
+const DetailRoute = DetailImport.update({
+  path: '/detail',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any)
 
-const FirstRouteInnerRouteRoute = FirstRouteInnerRouteImport.update({
-  path: '/innerRoute',
+const IndexRoute = IndexImport.update({
+  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -51,7 +51,14 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/detail': {
+      id: '/detail'
+      path: '/detail'
+      fullPath: '/detail'
+      preLoaderRoute: typeof DetailImport
       parentRoute: typeof rootRoute
     }
     '/firstRoute': {
@@ -68,23 +75,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/_firstRoute/innerRoute': {
-      id: '/_firstRoute/innerRoute'
-      path: '/innerRoute'
-      fullPath: '/innerRoute'
-      preLoaderRoute: typeof FirstRouteInnerRouteImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexLazyRoute,
+  IndexRoute,
+  DetailRoute,
   FirstRouteRoute,
   AboutLazyRoute,
-  FirstRouteInnerRouteRoute,
 })
 
 /* prettier-ignore-end */
@@ -96,22 +96,22 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/detail",
         "/firstRoute",
-        "/about",
-        "/_firstRoute/innerRoute"
+        "/about"
       ]
     },
     "/": {
-      "filePath": "index.lazy.tsx"
+      "filePath": "index.tsx"
+    },
+    "/detail": {
+      "filePath": "detail.tsx"
     },
     "/firstRoute": {
       "filePath": "firstRoute.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"
-    },
-    "/_firstRoute/innerRoute": {
-      "filePath": "_firstRoute/innerRoute.tsx"
     }
   }
 }

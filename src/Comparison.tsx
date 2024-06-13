@@ -27,11 +27,7 @@ const Comparison = () => {
   }
   const lastUpdatedTimestamp = queryLastUpdated.data;
   return (
-    <div>
-      <header className="text-2xl lg:text-center">
-        Hunter Valley Wineries
-      </header>
-
+    <>
       <ComparisonSettings
         {...{
           minimumReviews,
@@ -42,7 +38,7 @@ const Comparison = () => {
         }}
       />
       <ComparisonTable data={sorted} />
-    </div>
+    </>
   );
 };
 
