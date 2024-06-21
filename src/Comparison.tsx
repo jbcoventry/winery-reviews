@@ -28,10 +28,11 @@ const Comparison = () => {
   const lastUpdatedTimestamp = queryLastUpdated.data;
   return (
     <>
+
       <ComparisonSettings
         {...{
           minimumReviews,
-          setMinimumReviews,
+          setMinimumReviews, 
           oldestDate,
           setOldestDate,
           lastUpdatedTimestamp,

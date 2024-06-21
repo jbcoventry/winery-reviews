@@ -13,9 +13,10 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as WineryImport } from './routes/winery'
 import { Route as FirstRouteImport } from './routes/firstRoute'
-import { Route as DetailImport } from './routes/detail'
 import { Route as IndexImport } from './routes/index'
+import { Route as WineryWineryIdImport } from './routes/winery.$wineryId'
 
 // Create Virtual Routes
 
@@ -28,19 +29,24 @@ const AboutLazyRoute = AboutLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
-const FirstRouteRoute = FirstRouteImport.update({
-  path: '/firstRoute',
+const WineryRoute = WineryImport.update({
+  path: '/winery',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DetailRoute = DetailImport.update({
-  path: '/detail',
+const FirstRouteRoute = FirstRouteImport.update({
+  path: '/firstRoute',
   getParentRoute: () => rootRoute,
 } as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const WineryWineryIdRoute = WineryWineryIdImport.update({
+  path: '/$wineryId',
+  getParentRoute: () => WineryRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -54,18 +60,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/detail': {
-      id: '/detail'
-      path: '/detail'
-      fullPath: '/detail'
-      preLoaderRoute: typeof DetailImport
-      parentRoute: typeof rootRoute
-    }
     '/firstRoute': {
       id: '/firstRoute'
       path: '/firstRoute'
       fullPath: '/firstRoute'
       preLoaderRoute: typeof FirstRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/winery': {
+      id: '/winery'
+      path: '/winery'
+      fullPath: '/winery'
+      preLoaderRoute: typeof WineryImport
       parentRoute: typeof rootRoute
     }
     '/about': {
@@ -75,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
+    '/winery/$wineryId': {
+      id: '/winery/$wineryId'
+      path: '/$wineryId'
+      fullPath: '/winery/$wineryId'
+      preLoaderRoute: typeof WineryWineryIdImport
+      parentRoute: typeof WineryImport
+    }
   }
 }
 
@@ -82,8 +95,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  DetailRoute,
   FirstRouteRoute,
+  WineryRoute: WineryRoute.addChildren({ WineryWineryIdRoute }),
   AboutLazyRoute,
 })
 
@@ -96,22 +109,29 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/detail",
         "/firstRoute",
+        "/winery",
         "/about"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/detail": {
-      "filePath": "detail.tsx"
-    },
     "/firstRoute": {
       "filePath": "firstRoute.tsx"
     },
+    "/winery": {
+      "filePath": "winery.tsx",
+      "children": [
+        "/winery/$wineryId"
+      ]
+    },
     "/about": {
       "filePath": "about.lazy.tsx"
+    },
+    "/winery/$wineryId": {
+      "filePath": "winery.$wineryId.tsx",
+      "parent": "/winery"
     }
   }
 }

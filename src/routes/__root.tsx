@@ -23,6 +23,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 //   ),
 // });
 
+
+
 export const Route = createRootRoute({
   component: () => (
     <div className="m-4">
