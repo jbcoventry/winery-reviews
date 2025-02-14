@@ -23,23 +23,21 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 //   ),
 // });
 
-
-
 export const Route = createRootRoute({
   component: () => (
     <div className="m-4">
       <header className="text-2xl lg:text-center">
-        Hunter Valley Wineries
+        <Link
+          to="/"
+          // activeProps={{
+          //   className: "font-bold",
+          // }}
+          // activeOptions={{ exact: true }}
+        >
+          Hunter Valley Wineries
+        </Link>
       </header>
-      <Link
-        to="/"
-        activeProps={{
-          className: "font-bold",
-        }}
-        activeOptions={{ exact: true }}
-      >
-        Home
-      </Link>
+      
       <Outlet />
       <ReactQueryDevtools />
 

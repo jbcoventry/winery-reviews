@@ -3,12 +3,12 @@ export type Review = {
   timestamp: number;
 };
 
-type OpeningHours = {
-  days: string;
+export type OpeningHours = {
+  day: string;
   hours: string;
 };
-type Winery = {
-  id: number;
+export type Winery = {
+  id: string;
   title: string;
   street: string;
   city: string;
@@ -20,7 +20,15 @@ type Winery = {
   reviews: Review[];
 };
 
+export type ComparisonTableRow = {
+  id: string;
+  title: string;
+  averageRating: number;
+  NumberOfReviews: number;
+};
+
 export type wineriesAPIResponse = Winery[] | undefined;
+export type wineriesDetailAPIResponse = Winery | undefined;
 
 export type queryLastUpdatedType = {
   data: string;

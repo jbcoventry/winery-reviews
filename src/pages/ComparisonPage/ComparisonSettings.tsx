@@ -17,7 +17,7 @@ const ComparisonSettings = ({
   lastUpdatedTimestamp,
 }: ComparisonSettingsProps) => {
   return (
-    <div className="grid grid-flow-dense grid-cols-1 gap-2 lg:grid-cols-3">
+    <div className="my-4 grid grid-flow-dense grid-cols-1 gap-2 lg:grid-cols-3">
       <LastUpdated timestamp={lastUpdatedTimestamp} />
       <NumberInput
         title={"Minimum Total Reviews:"}
