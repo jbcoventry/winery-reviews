@@ -4,9 +4,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="m-4">
-      <header className="text-2xl lg:text-center">
-        <Link to="/">Hunter Valley Wineries</Link>
+    <div className="">
+      <header className="p-4 text-center text-2xl">
+        <Link to="/">
+          <p className="inline">Hunter Valley Wineries</p>
+        </Link>
       </header>
 
       <Outlet />

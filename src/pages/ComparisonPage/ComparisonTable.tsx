@@ -5,34 +5,30 @@ export type ComparisonTableProps = ComparisonTableRow[];
 
 const ComparisonTable = ({ data }: { data: ComparisonTableProps }) => {
   return (
-    <div className="mx-2 my-2 flex flex-row">
-      <div className="flex flex-1"></div>
-      <table className="w-full text-md text-left max-w-6xl">
-        <thead className="">
-          <tr className="py-2">
-            <th className="px-3">Rank</th>
-            <th className="px-3">Winery</th>
-            <th className="px-3">Average Rating</th>
-            <th className="px-3">Number of Reviews</th>
+    <table className="text-md m-auto w-auto max-w-6xl text-left">
+      <thead className="">
+        <tr className="">
+          <th className="p-2">Rank</th>
+          <th className="p-2">Winery</th>
+          <th className="p-2">Rating</th>
+          <th className="p-2">No. Reviews</th>
+        </tr>
+      </thead>
+      <tbody className="">
+        {data?.map(({ id, title, averageRating, NumberOfReviews }, index) => (
+          <tr key={title} className="odd:bg-slate-100">
+            <td className="p-2">{index + 1}</td>
+            <td className="p-2">
+              <Link to={`/wineries/$wineryId`} params={{ wineryId: id }}>
+                {title}
+              </Link>
+            </td>
+            <td className="p-2">{averageRating}</td>
+            <td className="p-2">{NumberOfReviews}</td>
           </tr>
-        </thead>
-        <tbody className="">
-          {data?.map(({ id, title, averageRating, NumberOfReviews }, index) => (
-            <tr key={title} className="odd:bg-gray-50 py-1">
-              <td className="px-3">{index + 1}</td>
-              <td className="px-3">
-                <Link to={`/wineries/$wineryId`} params={{ wineryId: id }}>
-                  {title}
-                </Link>
-              </td>
-              <td className="px-3">{averageRating}</td>
-              <td className="px-3">{NumberOfReviews}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="flex flex-1"></div>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
