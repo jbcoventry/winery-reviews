@@ -6,7 +6,7 @@ type ComparisonSettingsProps = {
   setMinimumReviews: React.Dispatch<React.SetStateAction<number>>;
   oldestDate: number;
   setOldestDate: React.Dispatch<React.SetStateAction<number>>;
-  lastUpdatedTimestamp: string;
+  lastUpdatedTimestamp: string | unknown;
 };
 
 const ComparisonSettings = ({

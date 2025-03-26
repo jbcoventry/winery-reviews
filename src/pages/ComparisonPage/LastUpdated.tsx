@@ -1,8 +1,10 @@
-const LastUpdated = ({ timestamp }: { timestamp: string }) => {
+const LastUpdated = ({ timestamp }: { timestamp: string | unknown }) => {
   return (
-    <div className="grid items-center rounded lg:col-start-3  ">
+    <div className="grid items-center rounded lg:col-start-3">
       Reviews Updated:
-      {new Date(timestamp).toLocaleString()}
+      {typeof timestamp === "string"
+        ? new Date(timestamp).toLocaleString()
+        : "N/A"}
     </div>
   );
 };

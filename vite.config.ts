@@ -16,14 +16,16 @@ export default defineConfig({
         target: "https://wineries.jbcov.com",
         changeOrigin: true,
 
-        configure: (proxy, options) => {
-          proxy.on("error", (err, _req, _res) => {
+        configure: (proxy) => {
+          proxy.on("error", (err) => {
             console.log("error", err);
           });
-          proxy.on("proxyReq", (proxyReq, req, _res) => {
+
+          //@ts-expect-error: don't need proxyReq
+          proxy.on("proxyReq", (proxyReq, req) => {
             console.log("Request sent to target:", req.method, req.url);
           });
-          proxy.on("proxyRes", (proxyRes, req, _res) => {
+          proxy.on("proxyRes", (proxyRes, req) => {
             console.log(
               "Response received from target:",
               proxyRes.statusCode,

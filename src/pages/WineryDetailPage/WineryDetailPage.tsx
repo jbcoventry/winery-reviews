@@ -15,8 +15,6 @@ import { Review } from "../../types";
 import { addMonths, format } from "date-fns";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
-import 'react-datepicker/dist/react-datepicker.css'
-
 
 function getCumulativeChartData(reviews: Review[], startDate: Date | null) {
   // const startDate = new Date("2022-01-01T00:00:00");
@@ -27,31 +25,33 @@ function getCumulativeChartData(reviews: Review[], startDate: Date | null) {
   const endDateTimestamp = endDate.getTime();
 
   const revs = reviews
-    .filter((r) => (r.timestamp*1000) > startDateTimestamp)
+    .filter((r) => r.timestamp * 1000 > startDateTimestamp)
     .sort((a, b) => a.timestamp - b.timestamp);
 
   const data = new Array<{ name: string; value: number }>();
 
   // TODO: fix starting at zero, start at past previous cumulative average
-  
-  
-  
-  let currentEndTimestamp =  addMonths(startDateTimestamp, 1).getTime();
+
+  let currentEndTimestamp = addMonths(startDateTimestamp, 1).getTime();
   while (currentEndTimestamp < endDateTimestamp) {
     // Add a month
-    const inOneMonth = addMonths(currentEndTimestamp, 1)
+    const inOneMonth = addMonths(currentEndTimestamp, 1);
     const inOneMonthTimestamp = inOneMonth.getTime();
-    const revsSoFar = revs.filter((r) => (r.timestamp * 1000) < inOneMonthTimestamp)
-    const cumulativeAverage = revsSoFar.length ? revsSoFar.map((r) => r.rating).reduce((a,b) => a + b, 0) / revsSoFar.length : 0
+    const revsSoFar = revs.filter(
+      (r) => r.timestamp * 1000 < inOneMonthTimestamp,
+    );
+    const cumulativeAverage = revsSoFar.length
+      ? revsSoFar.map((r) => r.rating).reduce((a, b) => a + b, 0) /
+        revsSoFar.length
+      : 0;
 
     // Add data point to array
-    const label = format(inOneMonth, 'LLL yy');
-    data.push({name: label, value: cumulativeAverage})
+    const label = format(inOneMonth, "LLL yy");
+    data.push({ name: label, value: cumulativeAverage });
 
     // Increment
-    currentEndTimestamp = inOneMonthTimestamp
+    currentEndTimestamp = inOneMonthTimestamp;
   }
-
 
   return data;
 }
@@ -64,7 +64,9 @@ export function WineryDetailPage() {
     queryFn: fetchWineryById,
   });
 
-  const [startDate, setStartDate] = useState<Date | null>(new Date("2022-01-01T00:00:00"));
+  const [startDate, setStartDate] = useState<Date | null>(
+    new Date("2022-01-01T00:00:00"),
+  );
 
   // const wineryListData = useQuery({
   //   queryKey: ["list"],
@@ -72,8 +74,11 @@ export function WineryDetailPage() {
   // });
   // const wineryList = wineryListData?.data ?? null;
 
-  const reviews = wineryData?.data !== null && wineryData.data !== undefined ? wineryData.data.reviews : [];
-  const cumulativeChartData =  getCumulativeChartData(reviews, startDate);
+  const reviews =
+    wineryData?.data !== null && wineryData.data !== undefined
+      ? wineryData.data.reviews
+      : [];
+  const cumulativeChartData = getCumulativeChartData(reviews, startDate);
 
   if (wineryData.isError) {
     return <span>ERROR</span>;
@@ -91,7 +96,7 @@ export function WineryDetailPage() {
     <div className="p-2">
       {/* Winery basic details */}
       <div>
-        <h3 className={"text-lg mt-2 mb-2"}>{wineryData.data.title}</h3>
+        <h3 className={"mt-2 mb-2 text-lg"}>{wineryData.data.title}</h3>
         <div className={"my-2"}>
           <div>{wineryData.data.street}</div>
           <div>{wineryData.data.city}</div>
@@ -100,7 +105,7 @@ export function WineryDetailPage() {
         <div>
           <a
             href={`tel:${wineryData.data.phone}`}
-            className={"no-underline hover:underline hover:text-blue-400"}
+            className={"no-underline hover:text-blue-400 hover:underline"}
           >
             {wineryData.data.phone}
           </a>
@@ -108,7 +113,7 @@ export function WineryDetailPage() {
         <div>
           <Link
             to={wineryData.data.website}
-            className={"no-underline hover:underline hover:text-blue-400"}
+            className={"no-underline hover:text-blue-400 hover:underline"}
           >
             {wineryData.data.website}
           </Link>
@@ -117,7 +122,7 @@ export function WineryDetailPage() {
         <div
           className={wineryData.data.openingHours.length < 1 ? "hidden" : ""}
         >
-          <div className={"my-4 border rounded-md px-2 py-2 max-w-96"}>
+          <div className={"my-4 max-w-96 rounded-md border px-2 py-2"}>
             {wineryData.data.openingHours.map((oh, i) => (
               <div key={i} className={"flex justify-between"}>
                 <span>{oh.day}</span>
@@ -128,12 +133,12 @@ export function WineryDetailPage() {
         </div>
         {/* Chart */}
         <div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          dateFormat="MM/yyyy"
-          showMonthYearPicker
-        />
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            dateFormat="MM/yyyy"
+            showMonthYearPicker
+          />
 
           <LineChart
             width={1000}
