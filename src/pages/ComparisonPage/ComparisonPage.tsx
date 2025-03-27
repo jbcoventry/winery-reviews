@@ -8,14 +8,14 @@ import sortByReviewAverage from "../../helpers/sortByReviewAverage";
 
 const Comparison = () => {
   const [now] = useState(Date.now());
-  const [oldestDate, setOldestDate] = useState(0);
-  const [minimumReviews, setMinimumReviews] = useState(0);
+  const [oldestDate, setOldestDate] = useState<number | string>("");
+  const [minimumReviews, setMinimumReviews] = useState<number | string>("");
 
-  const queryData = useQuery({
+  const list = useQuery({
     queryKey: ["list"],
     queryFn: fetchList,
   });
-  const queryLastUpdated = useQuery({
+  const LastUpdated = useQuery({
     queryKey: ["LastUpdated"],
     queryFn: fetchLastUpdated,
   });
@@ -23,23 +23,20 @@ const Comparison = () => {
   const sorted = useMemo(
     () =>
       sortByReviewAverage(
-        queryData?.data,
+        list?.data,
         oldestDate,
         minimumReviews,
         now,
-        queryLastUpdated?.data,
+        LastUpdated?.data,
       ),
-    [queryData?.data, oldestDate, minimumReviews, now, queryLastUpdated?.data],
+    [list?.data, oldestDate, minimumReviews, now, LastUpdated?.data],
   );
   // const sortedNotIncludingLastWeek = useMemo(
   //   () => sortByReviewAverage(queryData?.data, oldestDate, minimumReviews, queryLastUpdated?.data ? (Date.parse(queryLastUpdated?.data) - 604800000) : undefined),
   //   [queryData?.data, oldestDate, minimumReviews, queryLastUpdated?.data],
   // );
-  if (!queryData.isSuccess || !queryLastUpdated.isSuccess) {
-    return <div></div>;
-  }
 
-  const lastUpdatedTimestamp = queryLastUpdated.data;
+  const lastUpdatedTimestamp = LastUpdated.data;
 
   return (
     <>

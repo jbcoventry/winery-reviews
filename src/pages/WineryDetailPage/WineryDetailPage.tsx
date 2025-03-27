@@ -10,6 +10,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  ResponsiveContainer,
 } from "recharts";
 import { Review } from "../../types";
 import { addMonths, format } from "date-fns";
@@ -119,30 +120,27 @@ export function WineryDetailPage() {
           </Link>
         </div>
         {/* Opening Hours */}
-        <div
-          className={wineryData.data.openingHours.length < 1 ? "hidden" : ""}
-        >
-          <div className={"my-4 max-w-96 rounded-md border px-2 py-2"}>
-            {wineryData.data.openingHours.map((oh, i) => (
-              <div key={i} className={"flex justify-between"}>
-                <span>{oh.day}</span>
-                <span>{oh.hours}</span>
-              </div>
-            ))}
-          </div>
+        <div className={"my-4 max-w-96 rounded-md border px-2 py-2"}>
+          {wineryData.data.openingHours
+            ? wineryData.data.openingHours.map((oh, i) => (
+                <div key={i} className={"flex justify-between"}>
+                  <span>{oh.day}</span>
+                  <span>{oh.hours}</span>
+                </div>
+              ))
+            : ""}
         </div>
-        {/* Chart */}
-        <div>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            dateFormat="MM/yyyy"
-            showMonthYearPicker
-          />
-
+      </div>
+      {/* Chart */}
+      <div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          dateFormat="MM/yyyy"
+          showMonthYearPicker
+        />
+        <ResponsiveContainer width="100%" height={350}>
           <LineChart
-            width={1000}
-            height={350}
             data={cumulativeChartData}
             margin={{ top: 35, right: 20, left: 20, bottom: 35 }}
           >
@@ -153,10 +151,8 @@ export function WineryDetailPage() {
             <Legend />
             <Line type="monotone" dataKey="value" stroke="#8884d8" />
           </LineChart>
-        </div>
+        </ResponsiveContainer>
       </div>
-      {/* Winery comparison charts */}
-      <div></div>
     </div>
   );
 }

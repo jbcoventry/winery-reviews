@@ -3,10 +3,6 @@ export type Review = {
   timestamp: number;
 };
 
-export type OpeningHours = {
-  day: string;
-  hours: string;
-};
 export type Winery = {
   id: string;
   title: string;
@@ -15,7 +11,19 @@ export type Winery = {
   postalCode: string;
   website: string;
   phone: string;
-  openingHours: OpeningHours[];
+  openingHours:
+    | [
+        { day: "Monday"; hours: string },
+        { day: "Tuesday"; hours: string },
+        { day: "Wednesday"; hours: string },
+        { day: "Thursday"; hours: string },
+        { day: "Friday"; hours: string },
+        { day: "Saturday"; hours: string },
+        { day: "Sunday"; hours: string },
+      ]
+    | []
+    | null;
+  location: { lat: number; lng: number } | null;
   lastUpdated: string;
   reviews: Review[];
 };
@@ -26,9 +34,6 @@ export type ComparisonTableRow = {
   averageRating: number;
   NumberOfReviews: number;
 };
-
-export type wineriesAPIResponse = Winery[] | undefined;
-export type wineriesDetailAPIResponse = Winery | undefined;
 
 export type queryLastUpdatedType = {
   data: string;

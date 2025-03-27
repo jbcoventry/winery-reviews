@@ -2,10 +2,10 @@ import NumberInput from "./NumberInput";
 import LastUpdated from "./LastUpdated";
 
 type ComparisonSettingsProps = {
-  minimumReviews: number;
-  setMinimumReviews: React.Dispatch<React.SetStateAction<number>>;
-  oldestDate: number;
-  setOldestDate: React.Dispatch<React.SetStateAction<number>>;
+  minimumReviews: number | string;
+  setMinimumReviews: React.Dispatch<React.SetStateAction<number | string>>;
+  oldestDate: number | string;
+  setOldestDate: React.Dispatch<React.SetStateAction<number | string>>;
   lastUpdatedTimestamp: string | unknown;
 };
 

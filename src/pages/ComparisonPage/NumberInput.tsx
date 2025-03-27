@@ -1,7 +1,7 @@
 type NumberInputProps = {
   title: string;
-  number: number;
-  setNumber: React.Dispatch<React.SetStateAction<number>>;
+  number: number | string;
+  setNumber: React.Dispatch<React.SetStateAction<number | string>>;
   maxLength: number;
 };
 
@@ -16,16 +16,16 @@ const NumberInput = ({
       <label className="grid grid-cols-2 items-center">
         {title}
         <input
-          className="w-16 rounded border"
-          type="text"
+          className="w-16 appearance-none rounded border"
+          type="number"
           inputMode="decimal"
           value={number}
           maxLength={maxLength}
           onChange={(e) => {
-            setNumber(Number(e.target.value.replace(/[^0-9]/g, "")));
+            setNumber(e.target.value);
           }}
           onFocus={() => {
-            setNumber(0);
+            setNumber("");
           }}
         />
       </label>
