@@ -5,7 +5,7 @@ export type ComparisonTableProps = ComparisonTableRow[];
 
 const ComparisonTable = ({ data }: { data: ComparisonTableProps }) => {
   return (
-    <table className="text-md m-auto w-auto max-w-6xl text-left">
+    <table className="text-md m-auto text-left">
       <thead className="">
         <tr className="">
           <th className="p-2">Rank</th>

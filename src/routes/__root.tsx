@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="">
+    <>
       <header className="p-4 text-center text-2xl">
         <Link to="/">
           <p className="inline">Hunter Valley Wineries</p>
@@ -15,6 +15,6 @@ export const Route = createRootRoute({
       <ReactQueryDevtools />
 
       <TanStackRouterDevtools position="bottom-right" />
-    </div>
+    </>
   ),
 });
