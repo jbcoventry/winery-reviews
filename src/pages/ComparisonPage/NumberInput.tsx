@@ -12,11 +12,11 @@ const NumberInput = ({
   maxLength,
 }: NumberInputProps) => {
   return (
-    <div className="col-start-1">
-      <label className="grid grid-cols-2 items-center">
+    <div className="">
+      <label className="">
         {title}
         <input
-          className="w-16 appearance-none rounded border"
+          className="w-12 appearance-none rounded border"
           type="number"
           inputMode="decimal"
           value={number}
