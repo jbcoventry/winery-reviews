@@ -17,21 +17,23 @@ const ComparisonSettings = ({
   lastUpdatedTimestamp,
 }: ComparisonSettingsProps) => {
   return (
-    <div className="my-4">
+    <>
+      <div className="grid grid-cols-[max-content_max-content] gap-2">
+        <NumberInput
+          title={"Minimum Total Reviews:"}
+          number={minimumReviews}
+          setNumber={setMinimumReviews}
+          maxLength={3}
+        />
+        <NumberInput
+          title={"Show for last X days:"}
+          number={oldestDate}
+          setNumber={setOldestDate}
+          maxLength={4}
+        />
+      </div>
       <LastUpdated timestamp={lastUpdatedTimestamp} />
-      <NumberInput
-        title={"Minimum Total Reviews:"}
-        number={minimumReviews}
-        setNumber={setMinimumReviews}
-        maxLength={3}
-      />
-      <NumberInput
-        title={"Show for last X days:"}
-        number={oldestDate}
-        setNumber={setOldestDate}
-        maxLength={4}
-      />
-    </div>
+    </>
   );
 };
 export default ComparisonSettings;

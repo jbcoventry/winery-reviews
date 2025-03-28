@@ -49,6 +49,7 @@ const Comparison = () => {
           lastUpdatedTimestamp,
         }}
       />
+
       <ComparisonTable data={sorted} />
     </>
   );
