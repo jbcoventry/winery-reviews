@@ -11,6 +11,7 @@ export type Winery = {
   postalCode: string;
   website: string;
   phone: string;
+  placeId: string;
   openingHours:
     | [
         { day: "Monday"; hours: string },

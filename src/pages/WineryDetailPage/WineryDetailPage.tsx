@@ -12,10 +12,11 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts";
-import { Review } from "../../types";
+import { Review, Winery } from "../../types";
 import { addMonths, format } from "date-fns";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
+import mapImage from "../../map.png";
 
 function getCumulativeChartData(reviews: Review[], startDate: Date | null) {
   // const startDate = new Date("2022-01-01T00:00:00");
@@ -94,65 +95,76 @@ export function WineryDetailPage() {
   }
 
   return (
-    <div className="p-2">
+    <>
       {/* Winery basic details */}
-      <div>
-        <h3 className={"mt-2 mb-2 text-lg"}>{wineryData.data.title}</h3>
-        <div className={"my-2"}>
-          <div>{wineryData.data.street}</div>
-          <div>{wineryData.data.city}</div>
-          <div>{wineryData.data.postalCode}</div>
+      <div className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2">
+        <div id="winery-detail-information" className="">
+          <h3 className={""}>{wineryData.data.title}</h3>
+          <div className={""}>
+            <div>{wineryData.data.street}</div>
+            <div>{wineryData.data.city}</div>
+            <div>{wineryData.data.postalCode}</div>
+          </div>
+          <div className="">
+            <a
+              href={`tel:${wineryData.data.phone}`}
+              className={"no-underline hover:text-blue-400 hover:underline"}
+            >
+              {wineryData.data.phone}
+            </a>
+          </div>
+          <div className="">
+            <Link
+              to={wineryData.data.website}
+              className={"no-underline hover:text-blue-400 hover:underline"}
+            >
+              {wineryData.data.website}
+            </Link>
+          </div>
+
+          {/* Opening Hours */}
+          <div className={"my-4 max-w-96 rounded-md border px-2 py-2"}>
+            {wineryData.data.openingHours
+              ? wineryData.data.openingHours.map((oh, i) => (
+                  <div key={i} className={"flex justify-between"}>
+                    <span>{oh.day}</span>
+                    <span>{oh.hours}</span>
+                  </div>
+                ))
+              : ""}
+          </div>
         </div>
-        <div>
-          <a
-            href={`tel:${wineryData.data.phone}`}
-            className={"no-underline hover:text-blue-400 hover:underline"}
-          >
-            {wineryData.data.phone}
-          </a>
-        </div>
-        <div>
-          <Link
-            to={wineryData.data.website}
-            className={"no-underline hover:text-blue-400 hover:underline"}
-          >
-            {wineryData.data.website}
-          </Link>
-        </div>
-        {/* Opening Hours */}
-        <div className={"my-4 max-w-96 rounded-md border px-2 py-2"}>
-          {wineryData.data.openingHours
-            ? wineryData.data.openingHours.map((oh, i) => (
-                <div key={i} className={"flex justify-between"}>
-                  <span>{oh.day}</span>
-                  <span>{oh.hours}</span>
-                </div>
-              ))
-            : ""}
-        </div>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query="${wineryData.data.location?.lat}%2C${wineryData.data.location?.lng}&query_place_id=${wineryData.data.placeId}`}
+          rel="noreferrer"
+        >
+          <img
+            src={`https://wineries.jbcov.com/api/map/${wineryData.data.id}`}
+            alt="map showing winery location"
+            className="h-[400px] w-[400px] max-w-full"
+          />
+        </a>
       </div>
       {/* Chart */}
-      <div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          dateFormat="MM/yyyy"
-          showMonthYearPicker
-        />
-        <ResponsiveContainer width="100%" height={350}>
-          <LineChart
-            data={cumulativeChartData}
-            margin={{ top: 35, right: 20, left: 20, bottom: 35 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis domain={[3, 5]} />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="value" stroke="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        dateFormat="MM/yyyy"
+        showMonthYearPicker
+      />
+      <ResponsiveContainer width="100%" height={350}>
+        <LineChart
+          data={cumulativeChartData}
+          margin={{ top: 35, right: 20, left: 20, bottom: 35 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis domain={[3, 5]} />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="value" stroke="#8884d8" />
+        </LineChart>
+      </ResponsiveContainer>
+    </>
   );
 }
