@@ -1,61 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "@tanstack/react-router";
 import fetchWineryById from "../../helpers/fetchWineryById";
-// import fetchList from "../../helpers/fetchList";
-import {
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  Tooltip,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-} from "recharts";
-import { Review } from "../../types";
-import { addMonths, format } from "date-fns";
-import DatePicker from "react-datepicker";
-import { useState } from "react";
-
-function getCumulativeChartData(reviews: Review[], startDate: Date | null) {
-  // const startDate = new Date("2022-01-01T00:00:00");
-  startDate = startDate || new Date("2022-01-01T00:00:00");
-  const endDate = new Date();
-
-  const startDateTimestamp = startDate.getTime();
-  const endDateTimestamp = endDate.getTime();
-
-  const revs = reviews
-    .filter((r) => r.timestamp * 1000 > startDateTimestamp)
-    .sort((a, b) => a.timestamp - b.timestamp);
-
-  const data = new Array<{ name: string; value: number }>();
-
-  // TODO: fix starting at zero, start at past previous cumulative average
-
-  let currentEndTimestamp = addMonths(startDateTimestamp, 1).getTime();
-  while (currentEndTimestamp < endDateTimestamp) {
-    // Add a month
-    const inOneMonth = addMonths(currentEndTimestamp, 1);
-    const inOneMonthTimestamp = inOneMonth.getTime();
-    const revsSoFar = revs.filter(
-      (r) => r.timestamp * 1000 < inOneMonthTimestamp,
-    );
-    const cumulativeAverage = revsSoFar.length
-      ? revsSoFar.map((r) => r.rating).reduce((a, b) => a + b, 0) /
-        revsSoFar.length
-      : 0;
-
-    // Add data point to array
-    const label = format(inOneMonth, "LLL yy");
-    data.push({ name: label, value: cumulativeAverage });
-
-    // Increment
-    currentEndTimestamp = inOneMonthTimestamp;
-  }
-
-  return data;
-}
 
 export function WineryDetailPage() {
   const { wineryId } = useParams({ from: "/wineries/$wineryId" });
@@ -64,22 +9,6 @@ export function WineryDetailPage() {
     queryKey: ["wineries", wineryId],
     queryFn: fetchWineryById,
   });
-
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2022-01-01T00:00:00"),
-  );
-
-  // const wineryListData = useQuery({
-  //   queryKey: ["list"],
-  //   queryFn: fetchList,
-  // });
-  // const wineryList = wineryListData?.data ?? null;
-
-  const reviews =
-    wineryData?.data !== null && wineryData.data !== undefined
-      ? wineryData.data.reviews
-      : [];
-  const cumulativeChartData = getCumulativeChartData(reviews, startDate);
 
   if (wineryData.isError) {
     return <span>ERROR</span>;
@@ -144,26 +73,6 @@ export function WineryDetailPage() {
           />
         </a>
       </div>
-      {/* Chart */}
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        dateFormat="MM/yyyy"
-        showMonthYearPicker
-      />
-      <ResponsiveContainer width="100%" height={350}>
-        <LineChart
-          data={cumulativeChartData}
-          margin={{ top: 35, right: 20, left: 20, bottom: 35 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis domain={[3, 5]} />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="value" stroke="#8884d8" />
-        </LineChart>
-      </ResponsiveContainer>
     </>
   );
 }
