@@ -11,7 +11,7 @@ const sortByReviewAverage = (
     return [];
   }
   const nowInSeconds = Math.round(now / 1000);
-  const oldestDateSeconds = Number(oldestDate) * 24 * 60 * 6;
+  const oldestDateSeconds = Number(oldestDate) * 24 * 60 * 60;
   // const lastUpdatedSeconds = Math.round(Date.parse(lastUpdated) / 1000);
   const wineriesOverMinimumReviews = data.filter(
     (winery: Winery) => winery.reviews.length >= Number(minimumReviews),
