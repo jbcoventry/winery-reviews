@@ -12,11 +12,10 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts";
-import { Review, Winery } from "../../types";
+import { Review } from "../../types";
 import { addMonths, format } from "date-fns";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
-import mapImage from "../../map.png";
 
 function getCumulativeChartData(reviews: Review[], startDate: Date | null) {
   // const startDate = new Date("2022-01-01T00:00:00");
