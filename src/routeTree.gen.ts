@@ -12,7 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as WineriesWineryIdImport } from './routes/wineries.$wineryId'
+import { Route as WineryWineryIdImport } from './routes/winery.$wineryId'
 
 // Create/Update Routes
 
@@ -22,9 +22,9 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const WineriesWineryIdRoute = WineriesWineryIdImport.update({
-  id: '/wineries/$wineryId',
-  path: '/wineries/$wineryId',
+const WineryWineryIdRoute = WineryWineryIdImport.update({
+  id: '/winery/$wineryId',
+  path: '/winery/$wineryId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,11 +39,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/wineries/$wineryId': {
-      id: '/wineries/$wineryId'
-      path: '/wineries/$wineryId'
-      fullPath: '/wineries/$wineryId'
-      preLoaderRoute: typeof WineriesWineryIdImport
+    '/winery/$wineryId': {
+      id: '/winery/$wineryId'
+      path: '/winery/$wineryId'
+      fullPath: '/winery/$wineryId'
+      preLoaderRoute: typeof WineryWineryIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +53,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/wineries/$wineryId': typeof WineriesWineryIdRoute
+  '/winery/$wineryId': typeof WineryWineryIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/wineries/$wineryId': typeof WineriesWineryIdRoute
+  '/winery/$wineryId': typeof WineryWineryIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/wineries/$wineryId': typeof WineriesWineryIdRoute
+  '/winery/$wineryId': typeof WineryWineryIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/wineries/$wineryId'
+  fullPaths: '/' | '/winery/$wineryId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/wineries/$wineryId'
-  id: '__root__' | '/' | '/wineries/$wineryId'
+  to: '/' | '/winery/$wineryId'
+  id: '__root__' | '/' | '/winery/$wineryId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  WineriesWineryIdRoute: typeof WineriesWineryIdRoute
+  WineryWineryIdRoute: typeof WineryWineryIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  WineriesWineryIdRoute: WineriesWineryIdRoute,
+  WineryWineryIdRoute: WineryWineryIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +97,14 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/wineries/$wineryId"
+        "/winery/$wineryId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/wineries/$wineryId": {
-      "filePath": "wineries.$wineryId.tsx"
+    "/winery/$wineryId": {
+      "filePath": "winery.$wineryId.tsx"
     }
   }
 }

@@ -19,7 +19,7 @@ const ComparisonTable = ({ data }: { data: ComparisonTableProps }) => {
           <tr key={title} className="odd:bg-slate-100 odd:dark:bg-zinc-700">
             <td className="p-2">{index + 1}</td>
             <td className="p-2">
-              <Link to={`/wineries/$wineryId`} params={{ wineryId: id }}>
+              <Link to={`/winery/$wineryId`} params={{ wineryId: id }}>
                 {title}
               </Link>
             </td>

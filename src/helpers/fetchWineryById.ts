@@ -1,11 +1,13 @@
 import { QueryFunction } from "@tanstack/react-query";
-import { Winery } from "../types";
+import { WineryInList } from "../types";
 
-const fetchWineryById: QueryFunction<Winery> = async function ({ queryKey }) {
+const fetchWineryById: QueryFunction<WineryInList> = async function ({
+  queryKey,
+}) {
   const wineryId = queryKey[1];
-  const response = await fetch(`/api/wineries/${wineryId}`);
+  const response = await fetch(`/api/winery/${wineryId}`);
   if (!response.ok) {
-    throw new Error("https://wineries.jbcov.com/api/list fetch not ok");
+    throw new Error(`/api/winery/${wineryId} fetch not ok`);
   }
   return response.json();
 };

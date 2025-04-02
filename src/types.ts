@@ -3,7 +3,7 @@ export type Review = {
   timestamp: number;
 };
 
-export type Winery = {
+export type WineryInList = {
   id: string;
   title: string;
   street: string;

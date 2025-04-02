@@ -1,7 +1,7 @@
-import { Winery, Review, ComparisonTableRow } from "../types";
+import { Review, ComparisonTableRow, WineryInList } from "../types";
 
 const sortByReviewAverage = (
-  data: Winery[] | undefined,
+  data: WineryInList[] | undefined,
   oldestDate: number | string,
   minimumReviews: number | string,
   now: number | undefined,
@@ -14,7 +14,7 @@ const sortByReviewAverage = (
   const oldestDateSeconds = Number(oldestDate) * 24 * 60 * 60;
   // const lastUpdatedSeconds = Math.round(Date.parse(lastUpdated) / 1000);
   const wineriesOverMinimumReviews = data.filter(
-    (winery: Winery) => winery.reviews.length >= Number(minimumReviews),
+    (winery: WineryInList) => winery.reviews.length >= Number(minimumReviews),
   );
   const indexOfOldestReviewToInclude = (x: Review[]) =>
     x.findIndex(

@@ -3,10 +3,10 @@ import { Link, useParams } from "@tanstack/react-router";
 import fetchWineryById from "../../helpers/fetchWineryById";
 
 export function WineryDetailPage() {
-  const { wineryId } = useParams({ from: "/wineries/$wineryId" });
+  const { wineryId } = useParams({ from: "/winery/$wineryId" });
 
   const wineryData = useQuery({
-    queryKey: ["wineries", wineryId],
+    queryKey: ["winery", wineryId],
     queryFn: fetchWineryById,
   });
 
