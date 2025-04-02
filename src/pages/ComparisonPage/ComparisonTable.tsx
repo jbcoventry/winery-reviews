@@ -9,7 +9,7 @@ const ComparisonTable = ({ data }: { data: ComparisonTableProps }) => {
       <thead className="">
         <tr className="">
           <th className="p-2">Rank</th>
-          <th className="p-2">Winery</th>
+          <th className="w-[512px] p-2">Winery</th>
           <th className="p-2">Rating</th>
           <th className="p-2">No. Reviews</th>
         </tr>

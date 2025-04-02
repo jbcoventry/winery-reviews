@@ -3,7 +3,19 @@ export type Review = {
   timestamp: number;
 };
 
+export type ReviewDetail = {
+  rating: 1 | 2 | 3 | 4 | 5;
+  timestamp: number;
+  responseFromOwnerText: string | null;
+  text: string | null;
+};
+
 export type WineryInList = {
+  id: string;
+  title: string;
+  reviews: Review[];
+};
+export type WineryDetail = {
   id: string;
   title: string;
   street: string;
@@ -26,7 +38,7 @@ export type WineryInList = {
     | null;
   location: { lat: number; lng: number } | null;
   lastUpdated: string;
-  reviews: Review[];
+  reviews: ReviewDetail[];
 };
 
 export type ComparisonTableRow = {

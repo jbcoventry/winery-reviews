@@ -1,7 +1,7 @@
 import { QueryFunction } from "@tanstack/react-query";
-import { WineryInList } from "../types";
+import { WineryDetail } from "../types";
 
-const fetchWineryById: QueryFunction<WineryInList> = async function ({
+const fetchWineryById: QueryFunction<WineryDetail> = async function ({
   queryKey,
 }) {
   const wineryId = queryKey[1];
