@@ -27,6 +27,24 @@ export function WineryDetailPage() {
   if (!winery) {
     return <span>NO DATA</span>;
   }
+  function averages2() {
+    return winery.reviews.reduce((acc, review, index, reviews) => {
+      return acc + review.rating;
+    }, 0);
+  }
+  function averages() {
+    return winery.reviews.toReversed().reduce((acc, review, index, reviews) => {
+      if (acc.length === 0) {
+        acc.push(review.rating);
+      } else {
+        acc.push(
+          (acc[acc.length - 1] * acc.length + review.rating) / (acc.length + 1),
+        );
+      }
+      console.log(acc);
+      return acc;
+    }, []);
+  }
 
   return (
     <>
@@ -79,6 +97,10 @@ export function WineryDetailPage() {
           />
         </a>
       </div>
+
+      {/* Chart */}
+      <div>{averages()}</div>
+      {/* Review List */}
       <h2 className="text-xl font-bold">Reviews</h2>
       <label>
         <input
