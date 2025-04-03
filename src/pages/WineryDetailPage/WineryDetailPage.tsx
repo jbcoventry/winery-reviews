@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "@tanstack/react-router";
 import fetchWineryById from "../../helpers/fetchWineryById";
+import { useState } from "react";
+import Review from "./Review";
 
 export function WineryDetailPage() {
   const { wineryId } = useParams({ from: "/winery/$wineryId" });
+  const [show5Stars, setShow5Stars] = useState(true);
+  const [showWineryResponse, setShowWineryResponse] = useState(false);
 
   const {
     data: winery,
@@ -75,19 +79,34 @@ export function WineryDetailPage() {
           />
         </a>
       </div>
-      <h2>Reviews</h2>
+      <h2 className="text-xl font-bold">Reviews</h2>
+      <label>
+        <input
+          type="checkbox"
+          checked={show5Stars}
+          onChange={() => setShow5Stars(!show5Stars)}
+        />
+        Show 5 stars
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          checked={showWineryResponse}
+          onChange={() => setShowWineryResponse(!showWineryResponse)}
+        />
+        Show winery response
+      </label>
       <div id="review-list" className="max-w-5xl">
-        {winery.reviews.map(
-          ({ rating, timestamp, text, responseFromOwnerText }) => (
-            <div className="m-2 grid grid-cols-1 odd:bg-slate-100 md:grid-cols-[100px_50px_1fr] odd:dark:bg-zinc-700">
-              <div>{new Date(timestamp * 1000).toLocaleDateString()}</div>
-              <div>{rating}</div>
-              <div className="max-w-prose">
-                {text} <br /> winery: {responseFromOwnerText}
-              </div>
-            </div>
-          ),
-        )}
+        <div className="m-2 grid grid-cols-1 text-center font-bold md:grid-cols-[100px_50px_1fr]">
+          <div>Date</div>
+          <div>Rating</div>
+          <div className="max-w-prose">Review Text</div>
+        </div>
+        {show5Stars
+          ? winery.reviews.map((review) => Review(review, showWineryResponse))
+          : winery.reviews
+              .filter((review) => review.rating < 5)
+              .map((review) => Review(review, showWineryResponse))}
       </div>
     </>
   );
