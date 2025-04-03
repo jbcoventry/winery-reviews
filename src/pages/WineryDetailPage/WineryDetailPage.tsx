@@ -97,7 +97,7 @@ export function WineryDetailPage() {
         Show winery response
       </label>
       <div id="review-list" className="max-w-5xl">
-        <div className="m-2 grid grid-cols-1 text-center font-bold md:grid-cols-[100px_50px_1fr]">
+        <div className="m-2 hidden grid-cols-1 text-center font-bold md:grid md:grid-cols-[100px_50px_1fr]">
           <div>Date</div>
           <div>Rating</div>
           <div className="max-w-prose">Review Text</div>

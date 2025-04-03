@@ -7,7 +7,10 @@ export function Review(
   return (
     <div className="m-2 grid grid-cols-1 odd:bg-slate-100 md:grid-cols-[100px_50px_1fr] odd:dark:bg-zinc-700">
       <div>{new Date(timestamp * 1000).toLocaleDateString()}</div>
-      <div>{rating}</div>
+      <div>
+        <div className="inline font-bold md:hidden">Rating:</div>
+        {rating}
+      </div>
       <div className="max-w-prose">
         {text} <br />
         <div className="text-red-500 italic">
