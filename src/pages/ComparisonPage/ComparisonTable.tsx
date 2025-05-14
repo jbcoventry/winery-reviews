@@ -18,7 +18,7 @@ const ComparisonTable = ({ data }: { data: ComparisonTableProps }) => {
         {data?.map(({ id, title, averageRating, NumberOfReviews }, index) => (
           <tr key={title} className="odd:bg-slate-100 odd:dark:bg-zinc-700">
             <td className="p-2">{index + 1}</td>
-            <td className="p-2">
+            <td className="p-2 text-blue-600 hover:text-blue-800">
               <Link to={`/winery/$wineryId`} params={{ wineryId: id }}>
                 {title}
               </Link>
